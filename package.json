@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sobrien-eng/FullStack-moviedb/issues"
   },
-  "homepage": "https://github.com/sobrien-eng/FullStack-moviedb#readme"
+  "homepage": "https://github.com/sobrien-eng/FullStack-moviedb#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0"
+  }
 }
