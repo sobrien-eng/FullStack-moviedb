@@ -7,6 +7,7 @@ export default class Login extends React.Component {
     render() {
         return (
             <div class="container-sm">
+                <h2>Log in</h2>
                 <Form>
                     <FormGroup>
                         <Input type="username" name="username" id="username" placeholder="Username" />
