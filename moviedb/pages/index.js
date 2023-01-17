@@ -3,7 +3,9 @@ import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+import { Amplify } from 'aws-amplify';
+import config from './aws-exports';
+Amplify.configure(config);
 export default function Home() {
   return (
     <div className={styles.container}>

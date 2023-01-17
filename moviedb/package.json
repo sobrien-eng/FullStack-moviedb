@@ -6,6 +6,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^4.3.3",
+    "aws-amplify": "^5.0.10",
     "bootstrap": "^5.2.3",
     "gray-matter": "^4.0.3",
     "next": "latest",
