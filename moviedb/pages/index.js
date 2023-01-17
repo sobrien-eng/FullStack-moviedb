@@ -1,61 +1,13 @@
-import React from 'react'
-import { useState, useEffect} from 'react';
-// import Movie from './movielist/Movie';
-// import MovieList from './movielist/MovieList';
-import Head from 'next/head';
+import Head from 'next/head'
+import styles from '../styles/Home.module.css';
+import Link from 'next/link';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+// import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function index() {
-
-  const [movie, setMovie] = useState([]); // All People from the API
-  const [id, setId] = useState([]); // All People from the API
-  const [filteredMovie, setFilteredMovie] = useState([]); // The filtered list of people
-
-  // Filter Form State Variables
-  const [titleFilter, setTitleFilter] = useState('');
-  const [genreFilter, setGenreFilter] = useState('');
-
-// const movieSelected = (movie) =>{
-//   setMovie(movie);
-//   console.log(movie);
-//   console.log(movie);
-// }
-
-// const clearMovieSelected = () =>{
-//   setMovie('');
-// }
-
-useEffect(() => {
-  console.log(`Title: ${titleFilter} genre: ${genreFilter}`)
-
-  
-  //  If person.name.first or last contains what's in our name textbox
-  var tempMovie = movie.filter((movie) => { 
-    return movie.title.toLowerCase().includes(titleFilter.toLowerCase()) || 
-    movie.genres.toLowerCase().includes(genreFilter.toLowerCase()) 
-  }
-  );
-
-  setFilteredMovie(tempMovie);
-}, [titleFilter, genreFilter]);
-
-
-
-
-useEffect(() => {
-  getData();
-}, []);
-
-// const api_key =`245b5a23f0b29a2cd2d2fd6c071bad5e`;
-const getData = () => {
-  const url= `https://api.themoviedb.org/3/movie/${id}?api_key=245b5a23f0b29a2cd2d2fd6c071bad5e&language=en-US`
-  fetch(url)
-  .then(r => r.json(0))
-  .then(data => {
-    setMovie(data.results);
-    setFilteredMovie(data.results);
-  }).catch(e => console.log(e));
-}
-
+export default function Home() {
   return (
     <>
   
