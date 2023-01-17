@@ -5,7 +5,9 @@ import { Button, Form, FormGroup, Label, Input, FormText, Card, Container } from
 import "bootstrap/dist/css/bootstrap.min.css";
 export default class Login extends React.Component {
     render() {
+        <h2>Login</h2>
         return (
+           
             <div class="container-sm">
                 <Form>
                     <FormGroup>
