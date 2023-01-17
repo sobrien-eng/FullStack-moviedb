@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-
-import Link from 'next/link';
-import '../styles/global.css'
-
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
-=======
 import '../styles/global.css'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css';
@@ -14,7 +6,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
+import "@aws-amplify/ui-react/styles.css";
+import {
+  withAuthenticator,
+  Button,
+  Heading,
+  Image,
+  View,
+  Card,
+} from "@aws-amplify/ui-react";
 export default function App({ Component, pageProps }) {
   return(
     <><Head>
@@ -36,5 +36,4 @@ export default function App({ Component, pageProps }) {
     
     <Component {...pageProps} /></>
     )
->>>>>>> 0be8b4a446f500c5c5079bdab4852a7fbca204ed
 }
