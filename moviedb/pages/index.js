@@ -1,108 +1,343 @@
-import React from 'react'
-import { useState, useEffect} from 'react';
-// import Movie from './movielist/Movie';
-// import MovieList from './movielist/MovieList';
-import Head from 'next/head';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { Button, ButtonGroup } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
+// import styled from "styled-components";
+// import { useDispatch, useSelector } from "react-redux";
+//import {addGenres,removeFilter} from "../../reduxStore/sortFilter";
+import { fetchSort, fetchSortFilterDiscover,img_url} from './credits';
+// import ButtonCard from '../IconButtons/ButtonCard';
+import { Slider, Card } from '@mui/material';
 
-function index() {
 
-  const [movie, setMovie] = useState([]); // All People from the API
-  const [id, setId] = useState([]); // All People from the API
-  const [filteredMovie, setFilteredMovie] = useState([]); // The filtered list of people
+function FilterPage(props) {
+    const [genre_id, setGenre_id] = useState([]);
+    const [sort, setSort] = useState("");
+    const [dateTo, setDateTo] = useState("");
+    const [dateFrom, setDateFrom] = useState("");
+    const [data, setData] = useState(false);
+    const filtered=[];
 
-  // Filter Form State Variables
-  const [titleFilter, setTitleFilter] = useState('');
-  const [genreFilter, setGenreFilter] = useState('');
+      const sortQueryDiscover = useQuery(
+        ["SortData", sort,dateTo,dateFrom,genre_id],
+        () => fetchSortFilterDiscover(dateTo,dateFrom,genre_id,sort),
+        {
+          retry: false,
+        }
+      );
 
-// const movieSelected = (movie) =>{
-//   setMovie(movie);
-//   console.log(movie);
-//   console.log(movie);
-// }
+    function handleSearch(){
+      setTimeout(()=>console.log("data res-->",sortQueryDiscover.data.data.results),
+      200)
+      console.log("query-->",sortQueryDiscover)
+      setData(true);
 
-// const clearMovieSelected = () =>{
-//   setMovie('');
-// }
-
-useEffect(() => {
-  console.log(`Title: ${titleFilter} genre: ${genreFilter}`)
-
-  
-  //  If person.name.first or last contains what's in our name textbox
-  var tempMovie = movie.filter((movie) => { 
-    return movie.title.toLowerCase().includes(titleFilter.toLowerCase()) || 
-    movie.genres.toLowerCase().includes(genreFilter.toLowerCase()) 
-  }
-  );
-
-  setFilteredMovie(tempMovie);
-}, [titleFilter, genreFilter]);
+    }
+    const dataResults=sortQueryDiscover?.data?.data?.results;
 
 
 
 
-useEffect(() => {
-  getData();
-}, []);
-
-// const api_key =`245b5a23f0b29a2cd2d2fd6c071bad5e`;
-const getData = () => {
-  const url= `https://api.themoviedb.org/3/movie/${id}?api_key=245b5a23f0b29a2cd2d2fd6c071bad5e&language=en-US`
-  fetch(url)
-  .then(r => r.json(0))
-  .then(data => {
-    setMovie(data.results);
-    setFilteredMovie(data.results);
-  }).catch(e => console.log(e));
-}
-
-  return (
-    <>
-  
-    <Head>
-
-    <div className="App">
-    <div>
-      <b>Filters</b>
-      <div>
-        <div>
-          <label>title: </label>
-          <input type='text' placeholder='name filter'
-            value={titleFilter} onChange={(e) => setTitleFilter(e.target.value)} />
-        </div>
-        <div>
-          <label>genre: </label>
-          <input type='text' placeholder='Gender filter'
-            value={genreFilter} onChange={(e) => setGenreFilter(e.target.value)} />
-        </div>
-        <div>
-          <label>Id: </label>
-          <input type='number' placeholder='0' value={id} onChange={(e) => setId(e.target.value)}/>
+  if(!data){return (<>
+    <div className='col-sm-8'>
+      <select
+        className="form-select"
+        aria-label="Default select example"
+        onChange={(e) =>
+          setSort(e.target.options[e.target.selectedIndex].value)
+        }
+      >
+        <option hidden>Sort By</option>
+        <option value="original_title.asc">A to Z by The Title</option>
+        <option value="original_title.desc">Z to A by The Title</option>
+        <option value="popularity.asc">Increasing by Popularity</option>
+        <option value="popularity.desc">Decreasing by Popularity</option>
+        <option value="release_date.gte">Increasing by Release Date</option>
+        <option value="release_date.lte">Decreasing by Release Date</option>
+      </select>
+      <div className=" d-flex flex-column">
+        <h3 className="mt-3">Filter By</h3>
+        <label htmlFor="text" className="mt-3">
+          From:
+        </label>
+        <input type="date" onChange={(e) => setDateTo(e.target.value)} />
+        <label htmlFor="text" className="mt-3">
+          To:
+        </label>
+        <input type="date" onChange={(e) => setDateFrom(e.target.value)} />
       </div>
-    </div>
-    <br />
-      {
-        // If filtered people is not null, map through them and create some JSX for each
-        filteredMovie?.map((movie, index) => (
-          <div key={movie.id} className='userBox'>
-            <label>movie {index + 1}</label>
-            <div>
-              {movie.title}
-            </div>
-            <div>
-              <label>Username: </label>
-              {movie.genres}
-            </div>
-          </div>
-        ))
+
+      <ButtonGroup size="sm" className="mt-2">
+        <Button
+          className="m-2"
+          variant="light"
+          onClick={(e) => setGenre_id(e.target.value)}
+          value={28}
+          style={{backgroundColor:"#9c88ff"}}
+        >
+          Action
+        </Button>
+        <Button
+          className="m-2"
+          variant="light"
+          onClick={(e) => setGenre_id(e.target.value)}
+          value={12}
+          style={{backgroundColor:"#9c88ff"}}
+        >
+          Adventure
+        </Button>
+        <Button
+          className="m-2"
+          variant="light"
+          onClick={(e) => setGenre_id(e.target.value)}
+          value={35}
+          style={{backgroundColor:"#9c88ff"}}
+        >
+          Comedy
+        </Button>
+      </ButtonGroup>
+      <ButtonGroup size="sm">
+        <Button
+          className="m-2"
+          variant="light"
+          onClick={(e) => setGenre_id(e.target.value)}
+          value={10749}
+          style={{backgroundColor:"#9c88ff"}}
+        >
+          Romance
+        </Button>
+        <Button
+          className="m-2"
+          variant="light"
+          onClick={(e) => setGenre_id(e.target.value)}
+          value={18}
+          style={{backgroundColor:"#9c88ff"}}
+        >
+          Drama
+        </Button>
+        <Button
+          className="m-2"
+          variant="light"
+          onClick={(e) => setGenre_id(e.target.value)}
+          value={80}
+          style={{backgroundColor:"#9c88ff"}}
+        >
+          Crime
+        </Button>
+      </ButtonGroup>
+      <ButtonGroup size="sm">
+        <Button
+          className="m-2"
+          variant="light"
+          onClick={(e) => setGenre_id(e.target.value)}
+          value={27}
+          style={{backgroundColor:"#9c88ff"}}
+        >
+          Horror
+        </Button>
+        <Button
+          className="m-2"
+          variant="light"
+          onClick={(e) => setGenre_id(e.target.value)}
+          value={878}
+          style={{backgroundColor:"#9c88ff"}}
+        >
+          Science Fiction
+        </Button>
+        <Button
+          className="m-2"
+          variant="light"
+          onClick={(e) => setGenre_id(e.target.value)}
+          value={10752}
+          style={{backgroundColor:"#9c88ff"}}
+
+        >
+          War
+        </Button>
+      </ButtonGroup>
+
+      <Button
+        className="m-2"
+        variant="secondary"
+        size="sm"
+        onClick={handleSearch}
+        style={{backgroundColor:"#130f40"}}
+      >
+
+        Search
+      </Button>
+      {/* <Button
+        className="m-2"
+        variant="primary"
+        size="sm"
+        onClick={() => {
+         filtered=[]
+        }}
+      >
+        Reset
+      </Button> */}
+      </div>
+      <h3>Results:</h3>
+  </>);
+  }
+  if(data){
+    return(<>
+    <select
+      className="form-select" style={{width:"100px"}}
+      aria-label="Default select example"
+      onChange={(e) =>
+        setSort(e.target.options[e.target.selectedIndex].value)
       }
-    
+    >
+      <option hidden>Sort By</option>
+      <option value="original_title.asc">A to Z by The Title</option>
+      <option value="original_title.desc">Z to A by The Title</option>
+      <option value="popularity.asc">Increasing by Popularity</option>
+      <option value="popularity.desc">Decreasing by Popularity</option>
+      <option value="release_date.gte">Increasing by Release Date</option>
+      <option value="release_date.lte">Decreasing by Release Date</option>
+    </select>
+    <div className=" d-flex flex-column">
+      <h3 className="mt-3">Filter By</h3>
+      <label htmlFor="text" className="mt-3">
+        From:
+      </label>
+      <input type="date" onChange={(e) => setDateTo(e.target.value)} />
+      <label htmlFor="text" className="mt-3">
+        To:
+      </label>
+      <input type="date" onChange={(e) => setDateFrom(e.target.value)} />
     </div>
-    </div>
-    </Head>
+
+    <ButtonGroup size="sm" className="mt-2">
+      <Button
+        className="m-2"
+        variant="warning"
+        onClick={(e) => setGenre_id(e.target.value)}
+        value={28}
+        style={{backgroundColor:"#9c88ff"}}
+      >
+        Action
+      </Button>
+      <Button
+        className="m-2"
+        variant="warning"
+        onClick={(e) => setGenre_id(e.target.value)}
+        value={12}
+        style={{backgroundColor:"#9c88ff"}}
+      >
+        Adventure
+      </Button>
+      <Button
+        className="m-2"
+        variant="warning"
+        onClick={(e) => setGenre_id(e.target.value)}
+        value={35}
+        style={{backgroundColor:"#9c88ff"}}
+      >
+        Comedy
+      </Button>
+    </ButtonGroup>
+    <ButtonGroup size="sm">
+      <Button
+        className="m-2"
+        variant="warning"
+        onClick={(e) => setGenre_id(e.target.value)}
+        value={10749}
+        style={{backgroundColor:"#9c88ff"}}
+      >
+        Romance
+      </Button>
+      <Button
+        className="m-2"
+        variant="warning"
+        onClick={(e) => setGenre_id(e.target.value)}
+        value={18}
+        style={{backgroundColor:"#9c88ff"}}
+      >
+        Drama
+      </Button>
+      <Button
+        className="m-2"
+        variant="warning"
+        onClick={(e) => setGenre_id(e.target.value)}
+        value={80}
+        style={{backgroundColor:"#9c88ff"}}
+      >
+        Crime
+      </Button>
+    </ButtonGroup>
+    <ButtonGroup size="sm">
+      <Button
+        className="m-2"
+        variant="warning"
+        onClick={(e) => setGenre_id(e.target.value)}
+        value={27}
+        style={{backgroundColor:"#9c88ff"}}
+      >
+        Horror
+      </Button>
+      <Button
+        className="m-2"
+        variant="warning"
+        onClick={(e) => setGenre_id(e.target.value)}
+        value={878}
+        style={{backgroundColor:"#9c88ff"}}
+      >
+        Science Fiction
+      </Button>
+      <Button
+        className="m-2"
+        variant="warning"
+        onClick={(e) => setGenre_id(e.target.value)}
+        value={10752}
+        style={{backgroundColor:"#9c88ff"}}
+      >
+        War
+      </Button>
+    </ButtonGroup>
+
+    <Button
+      className="m-2"
+      variant="secondary"
+      size="sm"
+      onClick={handleSearch}
+      style={{backgroundColor:"#130f40"}}
+    >
+
+      Search
+    </Button>
+    {/* <Button
+      className="m-2"
+      variant="primary"
+      size="sm"
+      onClick={() => {
+       filtered=[]
+      }}
+    >
+      Reset
+    </Button> */}
+    <h3>Results:</h3>
+    <Slider {...sliderSettings}>
+    {
+      
+      dataResults.map((item,index)=>(
+        console.log(item),
+        <div key={index} className="col-sm-4">
+
+        <Link to={`/detail/${item.id} `} style={{ color: 'black' }}><Card img={`${img_url}${item.poster_path}`} title={item.title} releaseDate={item.release_date} id={item.id}/></Link>
+       {console.log(img_url+item.poster_path)}
+       
+      </div>
+       
+      ))
+    }
+   </Slider>
+</>);
     
-    </>
-  )
+  }
 }
 
-export default index
+
+export default FilterPage;
