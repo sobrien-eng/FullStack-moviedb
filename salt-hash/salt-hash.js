@@ -12,4 +12,15 @@ bcrypt.genSalt(10, (err, salt) => {
 });
 
 // Hash
-let hash = bcrypt.hash(password)
+let hash = bcrypt.hash(password);
+
+//All this does is print whats in the file
+const fs = require('fs')
+const csv = require('fast-csv');
+const data = []
+
+fs.createReadStream('users1.csv')
+    .pipe(csv.parse({ headers: true }))
+    .on('error', error => console.error(error))
+    .on('data', row => data.push(row))
+    .on('end', () => console.log(data));
