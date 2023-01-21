@@ -1,0 +1,45 @@
+.main {
+    display: flex;
+    margin-left: 5%;
+
+}
+
+.colOne {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid black;
+    width: 30%;
+    padding: 20px;
+}
+
+.username {}
+
+.delBtn {
+    margin-left: 40%;
+}
+
+.colTwo {
+    flex-direction: column;
+    border: 2px solid black;
+    width: 60%;
+
+}
+
+.reviewContainer {
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.reviewRow {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.reviewColOne {
+    width: 80%;
+}
+
+.reviewColTwo {
+    margin-left: auto;
+}

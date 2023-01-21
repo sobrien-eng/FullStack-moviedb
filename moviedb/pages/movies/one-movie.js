@@ -8,7 +8,10 @@ export default function OneMovie() {
       <Head>
         <title>movie</title>
       </Head>
-      <h1>signle movie</h1>
+      <div className={styles.container}>
+        <div className={styles.container}>
+        </div>
+      </div>
       <h2>
         <Link href="/">Back to home</Link>
       </h2>

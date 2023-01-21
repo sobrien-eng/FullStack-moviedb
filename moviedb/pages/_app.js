@@ -28,13 +28,12 @@ export default function App({ Component, pageProps }) {
               <Nav.Link href="/movies/first-movie">first movie</Nav.Link>
               <Nav.Link href="/signup">Signup</Nav.Link>
               <Nav.Link href="/login">Login</Nav.Link>
-              <Nav.Link href="/admindash">Admin</Nav.Link>
+              <Nav.Link href="/admin">Admin</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </Head>
-    
     <Component {...pageProps} /></>
     )
 }

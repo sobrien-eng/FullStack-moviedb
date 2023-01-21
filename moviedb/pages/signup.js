@@ -5,9 +5,8 @@ import { Button, Form, FormGroup, Label, Input, FormText, Card, Container } from
 import "bootstrap/dist/css/bootstrap.min.css";
 export default class Signup extends React.Component {
     render() {
-
         return (
-            <div class="container-sm">
+            <div class="container">
             <Form>
                 <FormGroup>
                 <Label>Your name</Label>

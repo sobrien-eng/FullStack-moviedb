@@ -14,6 +14,32 @@
     "categories": {
       "auth": {
         "fullstackmoviedbmovi409a6b09": {}
+      },
+      "function": {
+        "firstFunction": {
+          "deploymentBucketName": "amplify-amplifyb356753fddae4-staging-12009-deployment",
+          "s3Key": "amplify-builds/firstFunction-65332f6239346e796a48-build.zip"
+        },
+        "movies": {
+          "deploymentBucketName": "amplify-amplifyb356753fddae4-staging-12009-deployment",
+          "s3Key": "amplify-builds/movies-42574c72322f4c706e68-build.zip"
+        },
+        "users": {
+          "deploymentBucketName": "amplify-amplifyb356753fddae4-staging-12009-deployment",
+          "s3Key": "amplify-builds/users-717a7947324155725150-build.zip"
+        },
+        "userInfo": {
+          "deploymentBucketName": "amplify-amplifyb356753fddae4-staging-12009-deployment",
+          "s3Key": "amplify-builds/userInfo-3252336c3162414f4f58-build.zip"
+        },
+        "movieInfo": {
+          "deploymentBucketName": "amplify-amplifyb356753fddae4-staging-12009-deployment",
+          "s3Key": "amplify-builds/movieInfo-666c712f724f6d564157-build.zip"
+        }
+      },
+      "api": {
+        "movies": {},
+        "movieAPI": {}
       }
     }
   }
