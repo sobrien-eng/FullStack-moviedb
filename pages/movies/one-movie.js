@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Layout from '../../components/layout'
+import userMovieInfo from '../../components/UserMovieInfoCard';
 
 export default function OneMovie() {
   return (
@@ -15,6 +16,7 @@ export default function OneMovie() {
       <h2>
         <Link href="/">Back to home</Link>
       </h2>
+      <userMovieInfo/>
     </Layout>
   )
 }
