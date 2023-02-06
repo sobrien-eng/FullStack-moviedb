@@ -3,9 +3,9 @@
     On movie
 */
 
-import React from 'react'
+import React from 'react';
 import Movie from './movielist/Movie'
 
-function
+function 
 
 export default create-review;
