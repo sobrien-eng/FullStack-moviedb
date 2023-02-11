@@ -11,9 +11,7 @@ function CreateReview({movie, review}) {
         <div className='reviewForm'>
             <form>
                 <input placeholder="Write a Review..." />
-                <button type="submit" 
-
-                >Submit</button>
+                <button type="submit">Submit</button>
             </form>
                         
         </div>
